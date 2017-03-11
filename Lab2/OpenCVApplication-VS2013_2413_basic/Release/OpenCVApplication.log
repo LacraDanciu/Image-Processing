@@ -1,0 +1,43 @@
+﻿  OpenCVApplication.cpp
+OpenCVApplication.cpp(271): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+OpenCVApplication.cpp(550): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+OpenCVApplication.cpp(579): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+OpenCVApplication.cpp(596): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+OpenCVApplication.cpp(611): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+OpenCVApplication.cpp(654): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+OpenCVApplication.cpp(638): warning C4101: 'delta_p': unreferenced local variable
+OpenCVApplication.cpp(792): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+OpenCVApplication.cpp(793): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+OpenCVApplication.cpp(794): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+OpenCVApplication.cpp(738): warning C4101: 'H_norm': unreferenced local variable
+OpenCVApplication.cpp(738): warning C4101: 'V_norm': unreferenced local variable
+OpenCVApplication.cpp(738): warning C4101: 'S_norm': unreferenced local variable
+OpenCVApplication.cpp(824): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+OpenCVApplication.cpp(840): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+  Generating code
+  2 of 158 functions ( 1.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  OpenCVApplication.vcxproj -> E:\Image Processing\Lab2\OpenCVApplication-VS2013_2413_basic2\OpenCVApplication-VS2013_2413_basic\OpenCVApplication-VS2013_2413_basic\Release\OpenCVApplication.exe
+  OpenCVApplication.vcxproj -> E:\Image Processing\Lab2\OpenCVApplication-VS2013_2413_basic2\OpenCVApplication-VS2013_2413_basic\OpenCVApplication-VS2013_2413_basic\Release\OpenCVApplication.pdb (Full PDB)
+  OpenCV\dll\Release\opencv_calib3d2413.dll
+  OpenCV\dll\Release\opencv_contrib2413.dll
+  OpenCV\dll\Release\opencv_core2413.dll
+  OpenCV\dll\Release\opencv_features2d2413.dll
+  OpenCV\dll\Release\opencv_ffmpeg2413.dll
+  OpenCV\dll\Release\opencv_flann2413.dll
+  OpenCV\dll\Release\opencv_gpu2413.dll
+  OpenCV\dll\Release\opencv_highgui2413.dll
+  OpenCV\dll\Release\opencv_imgproc2413.dll
+  OpenCV\dll\Release\opencv_legacy2413.dll
+  OpenCV\dll\Release\opencv_ml2413.dll
+  OpenCV\dll\Release\opencv_nonfree2413.dll
+  OpenCV\dll\Release\opencv_objdetect2413.dll
+  OpenCV\dll\Release\opencv_ocl2413.dll
+  OpenCV\dll\Release\opencv_photo2413.dll
+  OpenCV\dll\Release\opencv_stitching2413.dll
+  OpenCV\dll\Release\opencv_superres2413.dll
+  OpenCV\dll\Release\opencv_video2413.dll
+  OpenCV\dll\Release\opencv_videostab2413.dll
+         19 file(s) copied.
