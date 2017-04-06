@@ -1579,7 +1579,7 @@ void Labelling1Call(Mat source)
 
 int minimVector(vector<int> L)
 {
-	int min = 100;
+	int min = 5000000;
 	for (int i = 0; i< L.size(); i++)
 	{
 		if (L[i] < min)
@@ -1608,7 +1608,7 @@ void Labelling2(Mat src, Mat result)
 	{
 		for (int j = 1; j < width - 1; j++)
 		{
-			if ((src.at<uchar>(i, j) == 0) && (labels.at<int32_t>(i, j) == 0))
+			if ((src.at<uchar>(i, j) == 0) && (labels.at<int>(i, j) == 0))
 			{
 				L = vector<int>();
 				for (int k = 0; k < 4; k++)
@@ -1628,7 +1628,6 @@ void Labelling2(Mat src, Mat result)
 				{
 					label++;
 					labels.at<int>(i, j) = label;
-					edges.resize(label + 1);
 				}
 				else
 				{
@@ -1636,10 +1635,11 @@ void Labelling2(Mat src, Mat result)
 					labels.at<int>(i, j) = x;
 					for (int e = 0; e < L.size(); e++)
 					{
-						if (L[e] != x)
+						if (L.at(e) != x)
 						{
-							edges[x].push_back(L[e]);
-							edges[L[e]].push_back(x);	
+							edges.resize(label + 1);
+							edges[x].push_back(L.at(e));
+							edges[L.at(e)].push_back(x);	
 						}
 					}
 
@@ -1648,10 +1648,10 @@ void Labelling2(Mat src, Mat result)
 		}
 	}
 	
-	Vec3b pallete[256];
+	Vec3b *pallete = (Vec3b *)malloc(sizeof(Vec3b) * label);
 	pallete[0] = Vec3b(255, 255, 255);
 
-	for (int i = 1; i < 256; i++)
+	for (int i = 1; i < label; i++)
 	{
 		pallete[i][0] = rand() % 256;
 		pallete[i][1] = rand() % 256;
@@ -1671,7 +1671,7 @@ void Labelling2(Mat src, Mat result)
 
 	memset(newLabels, 0, (label + 1) * sizeof(int));
 
-	for (int i =1; i <= label; i++)
+	for (int i =1; i < label; i++)
 	{
 		if (newLabels[i] == 0)
 		{
