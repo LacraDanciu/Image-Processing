@@ -1579,7 +1579,7 @@ void Labelling1Call(Mat source)
 
 int minimVector(vector<int> L)
 {
-	int min = 5000000;
+	int min = INT_MAX;
 	for (int i = 0; i< L.size(); i++)
 	{
 		if (L[i] < min)
