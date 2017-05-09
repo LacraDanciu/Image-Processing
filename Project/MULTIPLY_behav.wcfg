@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="MULTIPLY_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="MULTIPLY" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="1761fs"></ZoomEndTime>
+      <Cursor1Time time="0fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="175"></NameColumnWidth>
+      <ValueColumnWidth column_width="108"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="34" />
+   <wvobject fp_name="/MULTIPLY/A" type="array">
+      <obj_property name="ElementShortName">A[7:0]</obj_property>
+      <obj_property name="ObjectShortName">A[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/B" type="array">
+      <obj_property name="ElementShortName">B[7:0]</obj_property>
+      <obj_property name="ObjectShortName">B[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/RES" type="array">
+      <obj_property name="ElementShortName">RES[16:0]</obj_property>
+      <obj_property name="ObjectShortName">RES[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/ab0" type="array">
+      <obj_property name="ElementShortName">ab0[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab0[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/ab1" type="array">
+      <obj_property name="ElementShortName">ab1[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab1[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/ab2" type="array">
+      <obj_property name="ElementShortName">ab2[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab2[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/ab3" type="array">
+      <obj_property name="ElementShortName">ab3[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab3[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/ab4" type="array">
+      <obj_property name="ElementShortName">ab4[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab4[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/ab5" type="array">
+      <obj_property name="ElementShortName">ab5[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab5[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/ab6" type="array">
+      <obj_property name="ElementShortName">ab6[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab6[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/ab7" type="array">
+      <obj_property name="ElementShortName">ab7[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab7[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/s11" type="array">
+      <obj_property name="ElementShortName">s11[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s11[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c11" type="array">
+      <obj_property name="ElementShortName">c11[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c11[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c11s" type="array">
+      <obj_property name="ElementShortName">c11s[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c11s[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/s12" type="array">
+      <obj_property name="ElementShortName">s12[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s12[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c12" type="array">
+      <obj_property name="ElementShortName">c12[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c12[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c12s" type="array">
+      <obj_property name="ElementShortName">c12s[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c12s[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/s21" type="array">
+      <obj_property name="ElementShortName">s21[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s21[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c21" type="array">
+      <obj_property name="ElementShortName">c21[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c21[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c21s" type="array">
+      <obj_property name="ElementShortName">c21s[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c21s[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c22" type="array">
+      <obj_property name="ElementShortName">c22[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c22[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c22s" type="array">
+      <obj_property name="ElementShortName">c22s[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c22s[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/s22" type="array">
+      <obj_property name="ElementShortName">s22[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s22[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/s31" type="array">
+      <obj_property name="ElementShortName">s31[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s31[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c31" type="array">
+      <obj_property name="ElementShortName">c31[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c31[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c31s" type="array">
+      <obj_property name="ElementShortName">c31s[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c31s[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/s41" type="array">
+      <obj_property name="ElementShortName">s41[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s41[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c41" type="array">
+      <obj_property name="ElementShortName">c41[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c41[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/c41s" type="array">
+      <obj_property name="ElementShortName">c41s[15:0]</obj_property>
+      <obj_property name="ObjectShortName">c41s[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/negativeBoth" type="logic">
+      <obj_property name="ElementShortName">negativeBoth</obj_property>
+      <obj_property name="ObjectShortName">negativeBoth</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/negativeOne" type="logic">
+      <obj_property name="ElementShortName">negativeOne</obj_property>
+      <obj_property name="ObjectShortName">negativeOne</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/AUXA" type="array">
+      <obj_property name="ElementShortName">AUXA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">AUXA[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/AUXB" type="array">
+      <obj_property name="ElementShortName">AUXB[7:0]</obj_property>
+      <obj_property name="ObjectShortName">AUXB[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/MULTIPLY/AUXRESULT" type="array">
+      <obj_property name="ElementShortName">AUXRESULT[16:0]</obj_property>
+      <obj_property name="ObjectShortName">AUXRESULT[16:0]</obj_property>
+   </wvobject>
+</wave_config>

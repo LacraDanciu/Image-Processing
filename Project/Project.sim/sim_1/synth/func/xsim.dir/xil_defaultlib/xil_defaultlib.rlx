@@ -1,0 +1,10 @@
+0.6
+2016.4
+Jan 23 2017
+19:37:30
+E:/Vivado/Projects/Project/Project.sim/sim_1/synth/func/MULTIPLY_func_synth.v,1494332824,verilog,,,,CONTROLDIVI;DIVISION;REGISTERCOMP;REGISTERCOMP__parameterized1;REGISTERCOMP__parameterized3;SHIFTDIV;SHIFTDIV__parameterized1;glbl,,,,,,,,
+E:/Vivado/Projects/Project/Project.srcs/sources_1/new/ADD1BIT.vhd,1492451665,vhdl,,,,add1bit,,,,,,,,
+E:/Vivado/Projects/Project/Project.srcs/sources_1/new/CarryLookaheadAdder16BITS.vhd,1492451387,vhdl,,,,carrylookaheadadder16bits,,,,,,,,
+E:/Vivado/Projects/Project/Project.srcs/sources_1/new/CarrySaveAdder16BITS.vhd,1494327576,vhdl,,,,carrysaveadder16bits,,,,,,,,
+E:/Vivado/Projects/Project/Project.srcs/sources_1/new/HalfAdder1BIT.vhd,1492449218,vhdl,,,,halfadder1bit,,,,,,,,
+E:/Vivado/Projects/Project/Project.srcs/sources_1/new/MULTIPLY.vhd,1494330237,vhdl,,,,multiply,,,,,,,,

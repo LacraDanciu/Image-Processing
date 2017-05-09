@@ -1,0 +1,9 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "../../../../Project.srcs/sources_1/new/HalfAdder1BIT.vhd"
+vhdl xil_defaultlib  "../../../../Project.srcs/sources_1/new/ADD1BIT.vhd"
+vhdl xil_defaultlib  "../../../../Project.srcs/sources_1/new/CarrySaveAdder16BITS.vhd"
+vhdl xil_defaultlib  "../../../../Project.srcs/sources_1/new/CarryLookaheadAdder16BITS.vhd"
+vhdl xil_defaultlib  "../../../../Project.srcs/sources_1/new/MULTIPLY.vhd"
+
+# Do not sort compile order
+nosort
