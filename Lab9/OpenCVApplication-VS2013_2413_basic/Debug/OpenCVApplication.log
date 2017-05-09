@@ -1,0 +1,69 @@
+﻿  OpenCVApplication.cpp
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(23): warning C4305: 'initializing': truncation from 'double' to 'float'
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(579): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(608): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(628): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(643): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(686): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(670): warning C4101: 'delta_p': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(824): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(825): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(826): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(770): warning C4101: 'H_norm': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(770): warning C4101: 'V_norm': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(770): warning C4101: 'S_norm': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(853): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(869): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(953): warning C4101: 'sum': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(953): warning C4101: 'average': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1268): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1269): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1270): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1271): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1276): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1277): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1378): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1379): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1464): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1465): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1577): warning C4101: 'neigh': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1590): warning C4018: '<': signed/unsigned mismatch
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1644): warning C4018: '<': signed/unsigned mismatch
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1695): warning C4018: '<': signed/unsigned mismatch
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1729): warning C4101: 'neigh': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1747): warning C4101: 'dirOld': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1747): warning C4101: 'dirNew': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(1785): warning C4101: 'dirNew': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2268): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2243): warning C4101: 'equalizeHistogram': unreferenced local variable
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2402): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2436): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2596): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2642): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2643): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2655): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2656): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(2984): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\image processing\lab9\opencvapplication-vs2013_2413_basic\opencvapplication.cpp(731): warning C4715: 'fromColorToGray': not all control paths return a value
+  OpenCVApplication.vcxproj -> E:\Image Processing\Lab9\OpenCVApplication-VS2013_2413_basic\Debug\OpenCVApplication.exe
+  OpenCVApplication.vcxproj -> E:\Image Processing\Lab9\OpenCVApplication-VS2013_2413_basic\Debug\OpenCVApplication.pdb (Full PDB)
+  OpenCV\dll\Debug\opencv_calib3d2413d.dll
+  OpenCV\dll\Debug\opencv_contrib2413d.dll
+  OpenCV\dll\Debug\opencv_core2413d.dll
+  OpenCV\dll\Debug\opencv_features2d2413d.dll
+  OpenCV\dll\Debug\opencv_ffmpeg2413.dll
+  OpenCV\dll\Debug\opencv_flann2413d.dll
+  OpenCV\dll\Debug\opencv_gpu2413d.dll
+  OpenCV\dll\Debug\opencv_highgui2413d.dll
+  OpenCV\dll\Debug\opencv_imgproc2413d.dll
+  OpenCV\dll\Debug\opencv_legacy2413d.dll
+  OpenCV\dll\Debug\opencv_ml2413d.dll
+  OpenCV\dll\Debug\opencv_nonfree2413d.dll
+  OpenCV\dll\Debug\opencv_objdetect2413d.dll
+  OpenCV\dll\Debug\opencv_ocl2413d.dll
+  OpenCV\dll\Debug\opencv_photo2413d.dll
+  OpenCV\dll\Debug\opencv_stitching2413d.dll
+  OpenCV\dll\Debug\opencv_superres2413d.dll
+  OpenCV\dll\Debug\opencv_video2413d.dll
+  OpenCV\dll\Debug\opencv_videostab2413d.dll
+         19 file(s) copied.
