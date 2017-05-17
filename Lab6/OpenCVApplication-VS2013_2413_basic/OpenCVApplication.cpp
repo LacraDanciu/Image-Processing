@@ -1416,7 +1416,7 @@ void allObjects(Mat src, int TH_area, int phi_LOW, int phi_HIGH)
 
 	for (int i = 0; i < 256; i++)
 	{
-		visited[256] = 0;
+		visited[i] = 0;
 	}
 
 	for (int i = 0; i < height; i++)
