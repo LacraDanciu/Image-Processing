@@ -1,1 +1,0 @@
--wto "aaf535a1b7ae465ebdc005cb20c85e2b" --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "unisims_ver" -L "secureip" --snapshot "MULTIPLY_func_synth" "xil_defaultlib.MULTIPLY" "xil_defaultlib.glbl" -log "elaborate.log" 

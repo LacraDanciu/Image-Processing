@@ -2875,6 +2875,21 @@ void gaussian2(Mat img) {
 	}
 
 	Mat dest = Mat(img.rows, img.cols, CV_8UC1);
+	Mat aux2 = Mat(img.rows, img.cols, CV_8UC1);
+
+	for (int y = k; y < img.cols - k; y++)
+	{
+		for (int x = k; x < img.rows - k; x++)
+		{
+			int aux = 0;
+			for (int i = -k; i <= k; i++)
+				for (int j = -k; j <= k; j++)
+				{
+					aux += img.at<uchar>(x + j, y + i) * Gx[j + k];
+				}
+			aux2.at<uchar>(x, y) = aux;
+		}
+	}
 
 	for (int y = k; y < img.cols - k; y++)
 		for (int x = k; x < img.rows - k; x++)
@@ -2883,7 +2898,7 @@ void gaussian2(Mat img) {
 			for (int i = -k; i <= k; i++)
 				for (int j = -k; j <= k; j++)
 				{
-					aux += img.at<uchar>(x + j, y + i) * Gx[j + k] * Gy[i + k];
+					aux += aux2.at<uchar>(x + j, y + i) * Gy[i + k];
 				}
 			dest.at<uchar>(x, y) = aux;
 		}
@@ -2892,6 +2907,389 @@ void gaussian2(Mat img) {
 	printf("Time = %.3f [ms]\n", t * 1000);
 
 	imshow("Dest", dest);
+	waitKey();
+}
+
+/// -------------------------------------------------------------- LAB 11 - PART 1 ------------------------------------------------------
+// kernels Si, Sj
+void firstConvolution(Mat src, Mat Si, Mat Sj, Mat *dst, float p)
+{
+	int height = src.rows;
+	int width = src.cols;
+	int sum;
+	int median;
+	Mat Di(height, width, CV_8UC1);
+	Mat Dj(height, width, CV_8UC1);
+	Mat Mag(height, width, CV_8UC1);
+	Mat Magintitial = Mat::zeros(height, width, CV_32FC1);
+	Mat unghi = Mat::zeros(height, width, CV_32FC1);
+
+	for (int i = Si.rows; i < height - Si.rows; i++)
+	{
+		for (int j = Si.cols; j < width - Si.cols; j++)
+		{
+			sum = 0;
+			for (int p = 0; p < Si.rows; p++)
+			{
+				for (int q = 0; q < Si.cols; q++)
+				{
+					sum += src.at<uchar>(i + p - 1, j + q - 1) * Si.at<int>(p, q);
+				}
+			}
+
+			sum = sum + 128;
+			if (sum > 255)
+			{
+				sum = BACKGROUND;
+			}
+			if (sum < 0)
+			{
+				sum = OBJECT;
+			}
+
+			Di.at<uchar>(i, j) = sum;
+		}
+	}
+
+	for (int i = Sj.rows; i < height - Sj.rows; i++)
+	{
+		for (int j = Sj.cols; j < width - Sj.cols; j++)
+		{
+			sum = 0;
+			for (int p = 0; p < Sj.rows; p++)
+			{
+				for (int q = 0; q < Sj.cols; q++)
+				{
+					sum += src.at<uchar>(i + p - 1, j + q - 1) * Sj.at<int>(p, q);
+				}
+			}
+
+			sum = sum + 128;
+			if (sum > 255)
+			{
+				sum = BACKGROUND;
+			}
+			if (sum < 0)
+			{
+				sum = OBJECT;
+			}
+			Dj.at<uchar>(i, j) = sum;
+
+		}
+	}
+	//imshow("Di", Di);
+	//imshow("Dj", Dj);
+
+	//get rid of the 128
+	for (int i = Si.rows; i < height - Si.rows; i++)
+	{
+		for (int j = Si.cols; j < width - Si.cols; j++)
+		{
+			sum = 0;
+			for (int p = 0; p < Si.rows; p++)
+			{
+				for (int q = 0; q < Si.cols; q++)
+				{
+					sum += src.at<uchar>(i + p - 1, j + q - 1) * Si.at<int>(p, q);
+				}
+			}
+
+			if (sum > 255)
+			{
+				sum = BACKGROUND;
+			}
+			if (sum < 0)
+			{
+				sum = OBJECT;
+			}
+
+			Di.at<uchar>(i, j) = sum;
+		}
+	}
+
+	//get rid of the 128
+	for (int i = Sj.rows; i < height - Sj.rows; i++)
+	{
+		for (int j = Sj.cols; j < width - Sj.cols; j++)
+		{
+			sum = 0;
+			for (int p = 0; p < Sj.rows; p++)
+			{
+				for (int q = 0; q < Sj.cols; q++)
+				{
+					sum += src.at<uchar>(i + p - 1, j + q - 1) * Sj.at<int>(p, q);
+				}
+			}
+
+			if (sum > 255)
+			{
+				sum = BACKGROUND;
+			}
+			if (sum < 0)
+			{
+				sum = OBJECT;
+			}
+			Dj.at<uchar>(i, j) = sum;
+		}
+	}
+
+	//find the magnitude
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			float valForMag = sqrt(pow(Di.at<uchar>(i, j), 2) + pow(Dj.at<uchar>(i, j), 2));
+			Magintitial.at<float>(i, j) = valForMag;
+
+			if (valForMag > 255)
+			{
+				Mag.at<uchar>(i, j) = BACKGROUND;
+			}
+			else {
+				if (valForMag < 0)
+				{
+					Mag.at<uchar>(i, j) = OBJECT;
+				}
+				else
+					Mag.at<uchar>(i, j) = valForMag;
+			}
+		}
+	}
+
+	imshow("Mag", Mag);
+
+	//calculate the angle
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			unghi.at<float>(i, j) = atan2(Di.at<uchar>(i, j), Dj.at<uchar>(i, j));
+		}
+	}
+
+	Mat aux2 = Mat(height, width, CV_8UC1);
+	//create the image based on the circle
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			if (Mag.at<uchar>(i, j) > 20) {
+				if (unghi.at<float>(i, j) >= 0 && unghi.at<float>(i, j) <= PI / 8)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(255, 0, 0);
+					aux2.at<uchar>(i, j) = 2;
+				}
+				if (unghi.at<float>(i, j) <= (3 * PI) / 8 && unghi.at<float>(i, j) > PI / 8)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 255, 0);
+					aux2.at<uchar>(i, j) = 1;
+				}
+				if (unghi.at<float>(i, j) > (3 * PI) / 8 && unghi.at<float>(i, j) <= (5 * PI) / 8)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 0, 255);
+					aux2.at<uchar>(i, j) = 0;
+				}
+				if (unghi.at<float>(i, j) > (5 * PI) / 8 && unghi.at<float>(i, j) <= (7 * PI) / 8)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 255, 255);
+					aux2.at<uchar>(i, j) = 3;
+				}
+				if (unghi.at<float>(i, j) > (7 * PI) / 8 && unghi.at<float>(i, j) <= PI)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(255, 0, 0);
+					aux2.at<uchar>(i, j) = 2;
+				}
+
+				if (unghi.at<float>(i, j) > PI && unghi.at<float>(i, j) <= PI + (PI / 8))
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(255, 0, 0);
+					aux2.at<uchar>(i, j) = 1;
+				}
+
+				/*if (unghi.at<float>(i, j) < 0 / 8 && unghi.at<float>(i, j) >= -PI / 8)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(255, 0, 0);
+					aux2.at<uchar>(i, j) = 1;
+				}*/
+				/*if (unghi.at<float>(i, j) >= -(3 * PI) / 8 && unghi.at<float>(i, j) < -PI / 8)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 255, 255);
+					aux2.at<uchar>(i, j) = 3;
+				}*/
+
+				if (unghi.at<float>(i, j) > PI + (PI / 8) && unghi.at<float>(i, j) <= PI + ((3 * PI) / 8))
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 255, 255);
+					printf("aici %d %d ", i, j);
+					aux2.at<uchar>(i, j) = 3;
+				}
+			/*	if (unghi.at<float>(i, j) < -(3 * PI) / 8 && unghi.at<float>(i, j) >= -(5 * PI) / 8)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 0, 255);
+					aux2.at<uchar>(i, j) = 0;
+				}*/
+
+				if (unghi.at<float>(i, j) > PI + ((3 * PI) / 8) && unghi.at<float>(i, j) <= PI + ((5 * PI) / 8))
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 0, 255);
+					printf("aici %d %d ", i, j);
+					aux2.at<uchar>(i, j) = 0;
+				}
+				/*if (unghi.at<float>(i, j) < -(5 * PI) / 8 && unghi.at<float>(i, j) >= -(7 * PI) / 8)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 255, 0);
+					aux2.at<uchar>(i, j) = 1;
+				}*/
+
+				if (unghi.at<float>(i, j) > PI + ((5 * PI) / 8) && unghi.at<float>(i, j) <= PI + ((7 * PI) / 8))
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(0, 255, 0);
+					aux2.at<uchar>(i, j) = 1;
+				}
+				if (unghi.at<float>(i, j) < -(7 * PI) / 8 && unghi.at<float>(i, j) >= -PI)
+				{
+					dst->at<Vec3b>(i, j) = Vec3b(255, 0, 0);
+					aux2.at<uchar>(i, j) = 2;
+				}
+			}
+		}
+	}
+
+	Mat toFinal = Mag.clone();
+	for (int i = 1; i < height - 1; i++)
+	{
+		for (int j = 1; j < width - 1; j++)
+		{
+			if (aux2.at<uchar>(i, j) == 2) {
+				if (Magintitial.at<float>(i, j) < Magintitial.at<float>(i, j - 1) ||
+					Magintitial.at<float>(i, j) < Magintitial.at<float>(i, j + 1))
+				{
+					toFinal.at<uchar>(i, j) = 0;
+				}
+			}
+			if (aux2.at<uchar>(i, j) == 0) {
+				if (Magintitial.at<float>(i, j) < Magintitial.at<float>(i - 1, j) ||
+					Magintitial.at<float>(i, j) < Magintitial.at<float>(i + 1, j))
+				{
+					toFinal.at<uchar>(i, j) = 0;
+					
+				}
+			}
+
+			if (aux2.at<uchar>(i, j) == 1) {
+				if (Magintitial.at<float>(i, j) < Magintitial.at<float>(i - 1, j + 1) ||
+					Magintitial.at<float>(i, j) < Magintitial.at<float>(i + 1, j - 1))
+				{
+					toFinal.at<uchar>(i, j) = 0;
+				}
+			}
+
+			if (aux2.at<uchar>(i, j) == 3) {
+				if (Magintitial.at<float>(i, j) <Magintitial.at<float>(i - 1, j - 1) ||
+					Magintitial.at<float>(i, j) < Magintitial.at<float>(i + 1, j + 1))
+				{
+					toFinal.at<uchar>(i, j) = 0;
+				}
+			}
+		}
+	}
+
+	imshow("final", *dst);
+
+	imshow("mag modified", toFinal);
+
+	//adaptive thresholding
+	int histo[256];
+	float histoNormalized[256];
+	int searchedThreshold;
+	int thresholdLow;
+
+	buildHistogramFromMat(toFinal, histo, histoNormalized);
+
+	int NoNonEdge = (1 - p)*(height*width - histo[0]);
+
+	int sumHisto = 0;
+	for (int i = 1; i < 256; i++)
+	{
+		sumHisto += histo[i];
+		if (sumHisto > NoNonEdge)
+		{
+			searchedThreshold = i;
+			break;
+		}
+	}
+	
+	thresholdLow = 0.4 * searchedThreshold;
+	printf("High %d \n", searchedThreshold);
+    printf("Low %d \n", thresholdLow);
+
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			if (toFinal.at<uchar>(i,j) >= searchedThreshold)
+			{
+				toFinal.at<uchar>(i, j) = 255;
+			}
+			else
+			{
+				if (toFinal.at<uchar>(i, j) <= thresholdLow)
+				{
+					toFinal.at<uchar>(i, j) = 0;
+				}
+				else
+				{
+					toFinal.at<uchar>(i, j) = 128;
+				}
+			}
+		}
+	}
+
+	imshow("After edge strong and stuff", toFinal);
+
+	//labelling
+	for (int i = 1; i < height -1; i++)
+	{
+		for (int j = 1; j < width - 1; j++)
+		{
+			if (toFinal.at<uchar>(i,j) == BACKGROUND)
+			{
+				std::queue<Point2i> Q;
+				Q.push({ i, j });
+				while (!Q.empty())
+				{
+					Point2i p = Q.front();
+					Q.pop();
+
+					for (int k = -1; k <= 1; k++)
+					{
+						for (int l = -1; l <= 1; l++)
+						{
+							if (toFinal.at<uchar>(p.x + k, p.y + l) == 128)
+							{
+								toFinal.at<uchar>(p.x + k, p.y + l) = 255;
+								Q.push({ p.x + k, p.y + l });
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	for (int i = 1; i < height - 1; i++)
+	{
+		for (int j = 1; j < width - 1; j++)
+		{
+			if (toFinal.at<uchar>(i, j) != 255)
+			{
+				toFinal.at<uchar>(i, j) = 0;
+			}
+		}
+	}
+
+	imshow("Result", toFinal);
+
 	waitKey();
 }
 
@@ -2948,6 +3346,7 @@ int main()
 		printf(" 41 - Median Filter\n");
 		printf(" 42 - Gaussian Filter\n");
 		printf(" 43 - Gaussian Filter second approach\n");
+		printf(" 44 - Lab 11\n");
 		printf(" 0 - Exit\n\n");
 		printf("Option: ");
 		scanf("%d", &op);
@@ -3044,7 +3443,6 @@ int main()
 
 				multilevelThresoldingToColorImage(src);
 			}
-
 			break;
 		case 22:
 			testMouseClick();
@@ -3308,12 +3706,12 @@ int main()
 			if (openFileDlg(fname))
 			{
 				Mat src = imread(fname, CV_LOAD_IMAGE_GRAYSCALE);
-				float sigma;
+				/*float sigma;
 				printf("Sigma value :\n");
 				std::cin >> sigma;
-				Mat dst = Mat(src.rows, src.cols, CV_8UC1);
+				Mat dst = Mat(src.rows, src.cols, CV_8UC1);*/
 
-				GaussianFilterSecondOption(src, &dst, sigma);
+				gaussian2(src);
 			}
 
 			break;
@@ -3321,7 +3719,34 @@ int main()
 			if (openFileDlg(fname))
 			{
 				Mat src = imread(fname, CV_LOAD_IMAGE_GRAYSCALE);
-				gaussian2(src);
+				Mat dst = Mat(src.rows, src.cols, CV_8UC3);
+				float p;
+				printf("p value :\n");
+				std::cin >> p;
+
+				Mat M = Mat(3, 3, CV_32SC1);
+				Mat M2 = Mat(3, 3, CV_32SC1);
+				M.at<int>(0, 0) = -1;
+				M.at<int>(0, 1) = -2;
+				M.at<int>(0, 2) = -1;
+				M.at<int>(1, 0) = 0;
+				M.at<int>(1, 1) = 0;
+				M.at<int>(1, 2) = 0;
+				M.at<int>(2, 0) = 1;
+				M.at<int>(2, 1) = 2;
+				M.at<int>(2, 2) = 1;
+
+				M2.at<int>(0, 0) = -1;
+				M2.at<int>(0, 1) = 0;
+				M2.at<int>(0, 2) = 1;
+				M2.at<int>(1, 0) = -2;
+				M2.at<int>(1, 1) = 0;
+				M2.at<int>(1, 2) = 2;
+				M2.at<int>(2, 0) = -1;
+				M2.at<int>(2, 1) = 0;
+				M2.at<int>(2, 2) = 1;
+
+				firstConvolution(src, M, M2, &dst, p);
 			}
 
 			break;

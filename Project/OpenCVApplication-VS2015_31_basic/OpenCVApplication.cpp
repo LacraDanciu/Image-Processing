@@ -170,8 +170,8 @@ void testColor2Gray()
 			}
 		}
 
-		imshow("input image", src);
-		imshow("gray image", dst);
+		//imshow("input image", src);
+		//imshow("gray image", dst);
 		waitKey();
 	}
 }
@@ -214,10 +214,10 @@ void testBGR2HSV()
 			}
 		}
 
-		imshow("input image", src);
-		imshow("H", H);
-		imshow("S", S);
-		imshow("V", V);
+		//imshow("input image", src);
+		//imshow("H", H);
+		//imshow("S", S);
+		//imshow("V", V);
 
 		waitKey();
 	}
@@ -290,7 +290,6 @@ void testVideoSequence()
 		};
 	}
 }
-
 
 void testSnap()
 {
@@ -406,12 +405,12 @@ void opening(Mat src, Mat M)
 	Mat dst = src.clone();
 
 	erosion(src, &dst, M);
-	imshow("temp", dst);
+	//imshow("temp", dst);
 
 	Mat dst2 = dst.clone();
 
 	dilation(dst, &dst2, M);
-	imshow("opening", dst2);
+	//imshow("opening", dst2);
 }
 
 void closing(Mat src, Mat M)
@@ -424,7 +423,7 @@ void closing(Mat src, Mat M)
 
 	erosion(dst, &dst2, M);
 
-	imshow("closing", dst2);
+	//imshow("closing", dst2);
 }
 
 void boundaryExtraction(Mat src, Mat *dst, Mat M)
@@ -452,8 +451,7 @@ void boundaryExtraction(Mat src, Mat *dst, Mat M)
 		}
 	}
 
-	imshow("Boundary", dst2);
-	waitKey();
+	//imshow("Boundary", dst2);
 }
 
 void dilation(Mat src, Mat *dst, Mat M)
@@ -592,10 +590,10 @@ Mat fromRGBToHSV(Mat src)
 		}
 	}
 
-	imshow("input image", src);
+	/*imshow("input image", src);
 	imshow("hue image", hue_dst);
 	imshow("saturation image", saturation_dst);
-	imshow("value image", value_dst);
+	imshow("value image", value_dst);*/
 	return hue_dst;
 }
 
@@ -750,9 +748,8 @@ void basedOnSaturationStep(Mat *src)
 
 void GetMatBlobRemove(Mat *src)
 {
-
 	// threashold specifying minimum area of a blob
-	double threshold = 800;
+	double threshold = 200;
 
 	std::vector<std::vector<Point>> contours;
 
@@ -764,8 +761,7 @@ void GetMatBlobRemove(Mat *src)
 
 	// find all contours in the binary image
 	//src.copyTo(temp_image);
-	findContours(temp_image, contours, hierarchy, CV_RETR_CCOMP,
-		CV_CHAIN_APPROX_SIMPLE);
+	findContours(temp_image, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 
 	int p = 0;
 	small_blobs = (int *)malloc(sizeof(int) * (contours.size()));
@@ -774,7 +770,6 @@ void GetMatBlobRemove(Mat *src)
 		for (size_t i = 0; i < contours.size(); ++i) {
 
 			contour_area = contourArea(contours[i]);
-			printf("%f ", contour_area);
 			if (contour_area < threshold) {
 				small_blobs[p] = i;
 				p++;
@@ -784,56 +779,163 @@ void GetMatBlobRemove(Mat *src)
 
 	// fill-in all small contours with zeros
 	for (size_t i = 0; i < p; ++i) {
-		drawContours(*src, contours, small_blobs[i], cv::Scalar(0),
-			CV_FILLED, 8);
+		drawContours(*src, contours, small_blobs[i], cv::Scalar(0), CV_FILLED, 8);
 	}
 
-	imshow("ggggg", *src);
+	imshow("After blob removal", *src);
 }
 
-bool R1(float H, float S, float V)
+Mat face;
+void templateGenerator() {
+	Mat tmpl;
+	Mat tmpl1 = imread("template.jpg", CV_LOAD_IMAGE_GRAYSCALE); //open and read the image
+	resize(tmpl1, tmpl, Size(150, 180)); // 5 pe primul rand x 30, 6 pe coloana x 30
+	face = Mat(Size(30, 30), tmpl.type());
+	Mat hist;
+	equalizeHist(tmpl, hist);
+	
+	//aduna de la primul pixel din imaginea 1, al doilea din imaginea 2 ....
+	for (int i = 0; i < tmpl.rows; i++)
+		for (int j = 0; j < tmpl.cols; j++) {
+			face.at<uchar>(i % 30, j % 30) += 0.033333 * tmpl.at<uchar>(i, j);
+		}
+
+	imshow("Average face", face);
+	imshow("Normalized histogram", hist);
+
+}
+
+Mat fromColorToGray(Mat src)
 {
-	bool e8 = (H < 19);
-	bool e9 = (H > 240);
-	return e8 || e9;
+	int height = src.rows;
+	int width = src.cols;
+	Mat dst = Mat(height, width, CV_8UC1);
 
-}
-
-Mat GetSkin(Mat const &src) {
-
-	Mat dst = src.clone();
-	Vec3b cwhite = Vec3b::all(255);
-	Vec3b cblack = Vec3b::all(0);
-
-	Mat src_ycrcb, src_hsv;
-
-	cvtColor(src, src_ycrcb, CV_BGR2YCrCb);
-	src.convertTo(src_hsv, CV_32FC3);
-	cvtColor(src_hsv, src_hsv, CV_BGR2HSV);
-
-	normalize(src_hsv, src_hsv, 0.0, 255.0, NORM_MINMAX, CV_32FC3);
-
-	for (int i = 0; i < src.rows; i++)
+	for (int i = 0; i < height; i++)
 	{
-		for (int j = 0; j < src.cols; j++)
+		for (int j = 0; j < width; j++)
 		{
-
-
-			Vec3f pix_hsv = src_hsv.ptr<Vec3f>(i)[j];
-
-			float H = pix_hsv.val[0];
-			float S = pix_hsv.val[1];
-			float V = pix_hsv.val[2];
-
-			bool a = R1(H, S, V);
-
-			if (!a)
-				dst.ptr<Vec3b>(i)[j] = cblack;
+			dst.at<uchar>(i, j) = (src.at< Vec3b>(i, j)[0] + src.at< Vec3b>(i, j)[1] + src.at< Vec3b>(i, j)[2]) / 3;
 		}
 	}
 
 	return dst;
+}
 
+void convolutionAndNormalization(Mat src, Mat kernel, Mat *dst, Mat *convolution)
+{
+	int height = src.rows;
+	int width = src.cols;
+	double sum;
+	int median;
+
+	int energy = 0;
+
+	for (int i = 0; i < kernel.rows; i++)
+	{
+		for (int j = 0; j < kernel.cols; j++)
+		{
+			energy += kernel.at<uchar>(i, j);
+		}
+	}
+
+	for (int i = kernel.rows; i < height - kernel.rows; i++)
+	{
+		for (int j = kernel.cols; j < width - kernel.cols; j++)
+		{
+			sum = 0;
+			for (int p = 0; p < kernel.rows; p++)
+			{
+				for (int q = 0; q < kernel.cols; q++)
+				{
+					sum += src.at<uchar>(i + p - 1, j + q - 1) * kernel.at<uchar>(p, q);
+				}
+			}
+
+			// normalize by the energy in the template
+			sum = sum / energy;
+			dst->at<double>(i, j) = sum;
+		}
+	}
+
+	int maxim = INT_MIN;
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			if (maxim <= dst->at<double>(i, j))
+			{
+				maxim = dst->at<double>(i, j);
+			}
+		}
+	}
+
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			convolution->at<uchar>(i, j) = (int)255 * dst->at<double>(i, j) / maxim;
+
+		}
+	}
+
+}
+
+void findPeaksInImage(Mat src, Mat dst, int threshold)
+{
+	int height = src.rows;
+	int width = src.cols; 
+	int maxim = INT_MIN;
+	int notDone;
+
+	for (int i = 30; i < height - 30; i++)
+	{
+		for (int j = 30; j < width - 30; j++)
+		{
+			if (src.at<uchar>(i, j) > threshold)
+			{
+				notDone = 0;
+				maxim = INT_MIN;
+				for (int p = 0; p < 30; p++)
+				{
+					for (int m = 0; m < 30; m++)
+					{
+						if (src.at<uchar>(i + p - 15, j + m - 15) > maxim)
+						{
+							maxim = src.at<uchar>(i + p - 15, j + m - 15);
+						}
+					}
+				}
+
+				if (src.at<uchar>(i,j) == maxim)
+				{
+					dst.at<Vec3b>(i, j) = Vec3b(0, 0, 255);
+				}
+			
+			}
+		}
+	}
+
+	Scalar color = Scalar(0, 255, 0);
+	for (int i = 0; i < height; i++)
+	{
+		for (int j =0; j < width ; j++)
+		{
+
+			if (dst.at<Vec3b>(i, j) == Vec3b(0, 0, 255))
+			{
+				Point p;
+				p.x = j;
+				p.y = i;
+				Point p1;
+				p1.x = j + 30;
+				p1.y = i + 30;
+				rectangle(dst, p, p1, color, 2, 8, 0);
+			}
+		}
+	}
+
+	imshow("Result!", dst);
 }
 
 int main()
@@ -848,50 +950,64 @@ int main()
 	{
 		Mat src = imread(fname, CV_LOAD_IMAGE_COLOR);
 		printf("Apply the RGB to HSV transform on the image.\n");
+		Mat aux2;
+		Mat aux = src.clone();
+		Mat binary = Mat(src.rows, src.cols, CV_8UC1);
+		fromRGBToHSV(aux);
 
-		Mat aux;
-		////Mat aux2 = src.clone();
-		////Mat binary = Mat(src.rows, src.cols, CV_8UC1);
-		////fromRGBToHSV(aux);
+		// the first skin thresolding
+		firstSkinStep(&aux);
+		imshow("First skin step", aux);
 
-		////// the first skin thresolding
-		////firstSkinStep(&aux);
-		////imshow("First skin step", aux);
+		// RGB to YCrCb transform
+		fromRGBtoYCrCb(aux);
+		imshow("After YCrCb step", aux);
 
-		////// RGB to YCrCb transform
-		////fromRGBtoYCrCb(aux);
-		////imshow("After YCrCb step", aux);
+		// the second skin thresolding
+		secondSkinStep(&aux);
+		imshow("Second skin step", aux);
 
-		////// the second skin thresolding
-		////secondSkinStep(&aux);
-		////imshow("Second skin step", aux);
+		//the RBG thresolding where we try to get rid of other colors from the image != skin color
+		RBGThresolding(src, &aux);
+		imshow("After RGB thresholding", aux);
 
-		//////the RBG thresolding where we try to get rid of other colors from the image != skin color
-		////RBGThresolding(src, &aux);
-		////imshow("After RGB thresolding", aux);
+		basedOnSaturationStep(&aux);
+		imshow("After saturation thresholding", aux);
 
-		////basedOnSaturationStep(&aux);
-		////imshow("huh", aux);
+		// obtain the binary image based on what we have until now -> skin and not skin
+		binarizeImage(aux, &binary);
 
-		////// obtain the binary image based on what we have until now -> skin and not skin
-		//////binarizeImage(aux, &binary);
+		Mat M = Mat(3, 3, CV_8UC1);
+		M.at<uchar>(0, 0) = 1;
+		M.at<uchar>(0, 1) = 1;
+		M.at<uchar>(0, 2) = 1;
+		M.at<uchar>(1, 0) = 1;
+		M.at<uchar>(1, 1) = 1;
+		M.at<uchar>(1, 2) = 1;
+		M.at<uchar>(2, 0) = 1;
+		M.at<uchar>(2, 1) = 1;
+		M.at<uchar>(2, 2) = 1;
 
-		////Mat M = Mat(3, 3, CV_8UC1);
-		////M.at<uchar>(0, 0) = 1;
-		////M.at<uchar>(0, 1) = 1;
-		////M.at<uchar>(0, 2) = 1;
-		////M.at<uchar>(1, 0) = 1;
-		////M.at<uchar>(1, 1) = 1;
-		////M.at<uchar>(1, 2) = 1;
-		////M.at<uchar>(2, 0) = 1;
-		////M.at<uchar>(2, 1) = 1;
-		////M.at<uchar>(2, 2) = 1;
+		//After opening transform
+		opening(aux, M);
 
-		////opening(aux, M);
-
-		aux = GetSkin(src);
+		//After blob removal
 		GetMatBlobRemove(&aux);
+		aux2 = fromColorToGray(aux);
+		imshow("gray image", aux2);
 
+		//generate the template face
+		templateGenerator();
+
+		// do the convolution with the face
+		Mat convo = Mat::zeros(aux2.rows, aux2.cols, CV_64FC1);
+		Mat convolution = Mat(aux2.rows, aux2.cols, CV_8UC1);
+		convolutionAndNormalization(aux2, face, &convo, &convolution);
+
+		imshow("convolution", convolution);
+
+		// the threshold should be over 150 or something
+		findPeaksInImage(convolution, src, 150);
 		waitKey();
 
 	}
